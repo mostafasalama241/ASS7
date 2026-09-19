@@ -1,5 +1,4 @@
 ========================================================================
-Route Academy - Backend Node.js Assignment 7: MongoDB Shell Solutions
 File: mongosh-solutions.txt
 ========================================================================
 
