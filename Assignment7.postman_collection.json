@@ -1,0 +1,388 @@
+{
+	"info": {
+		"_postman_id": "a7b8c9d0-1234-5678-9abc-def012345678",
+		"name": "Route Assignment 7 - MongoDB Express API",
+		"description": "Postman Collection for Route Academy Node.js Assignment 7 endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Collection Management",
+			"item": [
+				{
+					"name": "1. Create Explicit Books Collection",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/collection/books",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["collection", "books"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Create Implicit Authors Collection",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Author1\",\n  \"nationality\": \"British\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/collection/authors",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["collection", "authors"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Create Capped Logs Collection",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/collection/logs/capped",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["collection", "logs", "capped"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Create Index on Books Title",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/collection/books/index",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["collection", "books", "index"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Books Operations",
+			"item": [
+				{
+					"name": "5. Insert One Book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Book1\",\n  \"author\": \"Ali\",\n  \"year\": 1937,\n  \"genres\": [\"Fantasy\", \"Adventure\"]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/books",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["books"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Insert Batch Books",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"title\": \"Future\",\n    \"author\": \"George Orwell\",\n    \"year\": 2020,\n    \"genres\": [\"Science Fiction\"]\n  },\n  {\n    \"title\": \"To Kill a Mockingbird\",\n    \"author\": \"Harper Lee\",\n    \"year\": 1960,\n    \"genres\": [\"Classic\", \"Fiction\"]\n  },\n  {\n    \"title\": \"Brave New World\",\n    \"author\": \"Aldous Huxley\",\n    \"year\": 2006,\n    \"genres\": [\"Dystopian\", \"Science Fiction\"]\n  }\n]"
+						},
+						"url": {
+							"raw": "http://localhost:3000/books/batch",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["books", "batch"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8. Update Book Year",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"year\": 2022\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/books/Future",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["books", "Future"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "9. Find Book by Title",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books/title?title=Brave New World",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["books", "title"],
+							"query": [
+								{
+									"key": "title",
+									"value": "Brave New World"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10. Find Books by Year Range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books/year?from=1990&to=2010",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["books", "year"],
+							"query": [
+								{
+									"key": "from",
+									"value": "1990"
+								},
+								{
+									"key": "to",
+									"value": "2010"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "11. Find Books by Genre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books/genre?genre=Science Fiction",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["books", "genre"],
+							"query": [
+								{
+									"key": "genre",
+									"value": "Science Fiction"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "12. Skip Limit and Sort Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books/skip-limit",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["books", "skip-limit"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "13. Find Books with Integer Year",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books/year-integer",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["books", "year-integer"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "14. Find Books Excluding Genres",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books/exclude-genres",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["books", "exclude-genres"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "15. Delete Books Before Year",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books/before-year?year=2000",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["books", "before-year"],
+							"query": [
+								{
+									"key": "year",
+									"value": "2000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Logs Operations",
+			"item": [
+				{
+					"name": "7. Insert One Log",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"book_id\": \"64b5c2d8a123456ef8914\",\n  \"action\": \"borrowed\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/logs",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["logs"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4. Aggregations",
+			"item": [
+				{
+					"name": "16. Aggregate Filter and Sort Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books/aggregate1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["books", "aggregate1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "17. Aggregate Project Book Fields",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books/aggregate2",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["books", "aggregate2"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "18. Aggregate Unwind Book Genres",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books/aggregate3",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["books", "aggregate3"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "19. Aggregate Join Books and Logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books/aggregate4",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["books", "aggregate4"]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

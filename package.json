@@ -1,0 +1,19 @@
+{
+  "name": "assignment-7",
+  "version": "1.0.0",
+  "description": "Route Academy Backend Node.js Assignment 7 - MongoDB & Express.js",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^18.0.1",
+    "express": "^5.2.1",
+    "mongodb": "^7.6.0"
+  }
+}
